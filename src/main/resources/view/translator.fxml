@@ -10,12 +10,12 @@
    <children>
       <TextField fx:id="txtEnterWord" alignment="CENTER" focusTraversable="false" layoutX="94.0" layoutY="117.0" promptText="Enter the word" />
       <TextField fx:id="txtTranslatedWord" alignment="CENTER" focusTraversable="false" layoutX="347.0" layoutY="117.0" promptText="Translation" />
-      <Button fx:id="btnTranslate" layoutX="268.0" layoutY="216.0" mnemonicParsing="false" text="Translate" />
+      <Button fx:id="btnTranslate" defaultButton="true" layoutX="268.0" layoutY="216.0" mnemonicParsing="false" text="Translate" />
       <Text fontSmoothingType="LCD" layoutX="149.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="English - Ukrainian translater by Andrey Volinskiy" textAlignment="CENTER">
          <font>
             <Font size="14.0" />
          </font>
       </Text>
-      <Button fx:id="btnOK" defaultButton="false" layoutX="422.0" layoutY="216.0" mnemonicParsing="false" text="OK" />
+      <Button fx:id="btnOK"  layoutX="422.0" layoutY="216.0" mnemonicParsing="false" text="OK" />
    </children>
 </AnchorPane>

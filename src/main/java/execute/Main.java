@@ -9,8 +9,8 @@ public class Main {
 
     public static void main(String[] args) {
 
-        ServiceFactory.getVocabularyService().add("Стілець", "Chair");
-        System.out.println(ServiceFactory.getVocabularyService().translate("масло"));
-        ServiceFactory.getVocabularyService().delete("Стілець");
+//        ServiceFactory.getVocabularyService().add("Стілець", "Chair");
+        System.out.println(ServiceFactory.getVocabularyService().translate("Молоко"));
+//        ServiceFactory.getVocabularyService().delete("Стілець");
     }
 }

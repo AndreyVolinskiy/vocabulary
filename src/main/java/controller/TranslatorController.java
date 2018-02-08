@@ -37,6 +37,7 @@ public class TranslatorController implements Initializable{
 
     private void translate() {
         String s = txtEnterWord.getText();
-        txtTranslatedWord.setText(ServiceFactory.getVocabularyService().translate(s));
+        String translation = ServiceFactory.getVocabularyService().translate(s);
+        txtTranslatedWord.setText(translation);
     }
 }
