@@ -1,10 +1,12 @@
 package service.impl;
 
 import dao.factory.DaoFactory;
+import model.Vocabulary;
 import service.VocabularyService;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  * @author Andrey Volinskiy on 08.02.2018.
@@ -16,17 +18,15 @@ public class VocabularyServiceImpl implements VocabularyService {
     @Override
     public String translate(String word) {
         String translatedWord = IMPOSSIBLE;
-        ResultSet resultSet = DaoFactory.getVocabularyDao().find(word);
-        try {
-            resultSet.next();
-            if (resultSet.getString("ukr").equals(word)) {
-                translatedWord = resultSet.getString("eng");
+        List<Vocabulary> list = DaoFactory.getVocabularyDao().find(word);
+
+        for (Vocabulary elem : list) {
+            if (elem.getEng().equals(word)) {
+                translatedWord = elem.getUkr();
             }
-            if (resultSet.getString("eng").equals(word)) {
-                translatedWord = resultSet.getString("ukr");
+            if (elem.getUkr().equals(word)) {
+                translatedWord = elem.getEng();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
         return translatedWord;
     }

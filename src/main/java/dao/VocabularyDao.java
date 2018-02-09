@@ -1,13 +1,15 @@
 package dao;
 
-import java.sql.ResultSet;
+import model.Vocabulary;
+
+import java.util.List;
 
 /**
  * @author Andrey Volinskiy on 07.02.2018.
  */
 public interface VocabularyDao {
 
-    ResultSet find(String word);
+    List<Vocabulary> find(String word);
 
     void add(String ukrWord, String engWord);
 

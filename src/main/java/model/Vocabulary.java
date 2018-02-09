@@ -12,8 +12,7 @@ import lombok.ToString;
 @ToString
 public class Vocabulary {
 
-    private static long id;
-    private static String ukr;
-    private static String eng;
-
+    private long id;
+    private String ukr;
+    private String eng;
 }

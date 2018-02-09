@@ -2,11 +2,14 @@ package dao.impl;
 
 import dao.VocabularyDao;
 import data.Database;
+import model.Vocabulary;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * @author Andrey Volinskiy on 07.02.2018.
@@ -17,18 +20,26 @@ public class VocabularyDaoImpl implements VocabularyDao {
     private static final String INSERT = "INSERT INTO vocabulary (ukr, eng) VALUES (?,?)";
     private static final String DELETE = "DELETE FROM vocabulary WHERE ukr = ? OR eng = ?";
 
+//   todo SELECT word FROM test WHERE word = 'Привіт' and language = 'eng';
+
     @Override
-    public ResultSet find(String word) {
-        ResultSet resultSet = null;
+    public List<Vocabulary> find(String word) {
+        List<Vocabulary> list = new LinkedList<>();
         try (Connection connection = Database.getConnection();
              PreparedStatement statement = connection.prepareStatement(FIND)) {
             statement.setString(1,word);
             statement.setString(2,word);
-            resultSet = statement.executeQuery();
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                Vocabulary vocabulary = new Vocabulary();
+                vocabulary.setUkr(resultSet.getString("ukr"));
+                vocabulary.setEng(resultSet.getString("eng"));
+                list.add(vocabulary);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return resultSet;
+        return list;
     }
 
     public void add(String ukrWord, String engWord) {
