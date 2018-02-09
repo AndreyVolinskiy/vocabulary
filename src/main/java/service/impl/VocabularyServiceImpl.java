@@ -1,11 +1,8 @@
 package service.impl;
 
 import dao.factory.DaoFactory;
-import data.Database;
 import service.VocabularyService;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -14,28 +11,24 @@ import java.sql.SQLException;
  */
 public class VocabularyServiceImpl implements VocabularyService {
 
-    private static final String TRANSLATION_UKR_ENG = "SELECT * FROM vocabulary WHERE ukr = ?";
-    private static final String TRANSLATION_ENG_UKR = "SELECT * FROM vocabulary WHERE eng = ?";
+    public static final String IMPOSSIBLE = "Translation impossible.";
 
     @Override
     public String translate(String word) {
-        try (Connection connection = Database.getConnection();
-             PreparedStatement statementUkrEng = connection.prepareStatement(TRANSLATION_UKR_ENG);
-             PreparedStatement statementEngUkr = connection.prepareStatement(TRANSLATION_ENG_UKR)) {
-            statementUkrEng.setString(1, word);
-            statementEngUkr.setString(1, word);
-            ResultSet resultSet1 = statementUkrEng.executeQuery();
-            ResultSet resultSet2 = statementEngUkr.executeQuery();
-            if (resultSet1.next()) {
-                return resultSet1.getString("eng");
+        String translatedWord = IMPOSSIBLE;
+        ResultSet resultSet = DaoFactory.getVocabularyDao().find(word);
+        try {
+            resultSet.next();
+            if (resultSet.getString("ukr").equals(word)) {
+                translatedWord = resultSet.getString("eng");
             }
-            if (resultSet2.next()) {
-                return resultSet2.getString("ukr");
+            if (resultSet.getString("eng").equals(word)) {
+                translatedWord = resultSet.getString("ukr");
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return "Translation impossible.";
+        return translatedWord;
     }
 
     @Override

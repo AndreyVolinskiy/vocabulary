@@ -11,11 +11,11 @@ public class Database {
 
     private static final String URL = "jdbc:mysql://localhost:3308/vocabulary"
             +
-            "?verifyServerCertificate=false"+
-            "&useSSL=false"+
-            "&requireSSL=false"+
-            "&useLegacyDatetimeCode=false"+
-            "&amp"+
+            "?verifyServerCertificate=false" +
+            "&useSSL=false" +
+            "&requireSSL=false" +
+            "&useLegacyDatetimeCode=false" +
+            "&amp" +
             "&serverTimezone=UTC";
     private static final String USERNAME = "root";
     private static final String PASSWORD = "root";
