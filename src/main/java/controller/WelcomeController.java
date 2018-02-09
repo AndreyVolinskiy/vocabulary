@@ -45,7 +45,7 @@ public class WelcomeController implements Initializable {
 
     private void goViewWindow(ActionEvent event) throws IOException {
         final FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("/view/translator.fxml"));
+        fxmlLoader.setLocation(getClass().getResource("/view/table.fxml"));
         Parent parent = fxmlLoader.load();
         final Stage stage = new Stage();
         Scene value = new Scene(parent);
