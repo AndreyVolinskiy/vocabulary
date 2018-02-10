@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 /**
  * @author Andrey Volinskiy on 10.02.2018.
  */
-public class WelcomeStart extends Application{
+public class WelcomeStart extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/view\\welcome.fxml"));

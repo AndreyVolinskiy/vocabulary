@@ -16,7 +16,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
@@ -25,7 +24,6 @@ import service.factory.ServiceFactory;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -77,7 +75,7 @@ public class TableController implements Initializable {
         table.setItems(observableList);
     }
 
-        private void goAddWindow(ActionEvent event) throws IOException {
+    private void goAddWindow(ActionEvent event) throws IOException {
         final FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("/view/add.fxml"));
         Parent parent = fxmlLoader.load();
@@ -88,6 +86,6 @@ public class TableController implements Initializable {
         Window window = ((Node) event.getSource()).getScene().getWindow();
         stage.initOwner(window);
         stage.show();
-        stage.setOnHiding();
+        stage.setOnHiding(event1 -> load());
     }
 }

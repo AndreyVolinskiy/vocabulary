@@ -23,7 +23,7 @@ public class WelcomeController implements Initializable {
     @FXML
     private Button btnExit;
     @FXML
-    private Button btnDelete;
+    private Button btnTranslate;
     @FXML
     private Button btnAdd;
     @FXML
@@ -32,7 +32,13 @@ public class WelcomeController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         btnExit.setOnAction(event -> exit());
-        btnDelete.setOnAction(event -> goDeleteWindow());
+        btnTranslate.setOnAction(event -> {
+            try {
+                goTranslateWindow(event);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
         btnAdd.setOnAction(event -> {
             try {
                 goAddWindow(event);
@@ -60,8 +66,6 @@ public class WelcomeController implements Initializable {
         Window window = ((Node) event.getSource()).getScene().getWindow();
         stage.initOwner(window);
         stage.show();
-
-//        stage.setOnHiding(e -> load());
     }
 
     private void goAddWindow(ActionEvent event) throws IOException {
@@ -75,10 +79,19 @@ public class WelcomeController implements Initializable {
         Window window = ((Node) event.getSource()).getScene().getWindow();
         stage.initOwner(window);
         stage.show();
-
     }
 
-    private void goDeleteWindow() {
+    private void goTranslateWindow(ActionEvent event) throws IOException {
+        final FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("/view/translate.fxml"));
+        Parent parent = fxmlLoader.load();
+        final Stage stage = new Stage();
+        Scene value = new Scene(parent);
+        stage.setScene(value);
+        stage.initModality(Modality.WINDOW_MODAL);
+        Window window = ((Node) event.getSource()).getScene().getWindow();
+        stage.initOwner(window);
+        stage.show();
     }
 
     private void exit() {

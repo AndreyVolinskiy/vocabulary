@@ -21,7 +21,7 @@
       </Text>
       <Button fx:id="btnView" focusTraversable="false" layoutX="56.0" layoutY="189.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="135.0" text="View dictionary" />
       <Button fx:id="btnAdd" focusTraversable="false" layoutX="233.0" layoutY="189.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="135.0" text="Add new words" />
-      <Button fx:id="btnDelete" focusTraversable="false" layoutX="409.0" layoutY="189.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="135.0" text="Delete existing words">
+      <Button fx:id="btnTranslate" focusTraversable="false" layoutX="409.0" layoutY="189.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="135.0" text="Translate">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>

@@ -15,10 +15,4 @@ public class Vocabulary {
     private long id;
     private String ukr;
     private String eng;
-
-    public Vocabulary(String ukr, String eng) {
-    }
-
-    public Vocabulary() {
-    }
 }

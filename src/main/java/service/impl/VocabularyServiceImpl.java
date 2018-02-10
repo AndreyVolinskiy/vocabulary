@@ -1,12 +1,9 @@
 package service.impl;
 
-import dao.VocabularyDao;
 import dao.factory.DaoFactory;
-import dao.impl.VocabularyDaoImpl;
 import model.Vocabulary;
 import service.VocabularyService;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -16,6 +13,11 @@ import java.util.List;
 public class VocabularyServiceImpl implements VocabularyService {
 
     public static final String IMPOSSIBLE = "Translation impossible.";
+
+    @Override
+    public String find(StringBuilder preparedStatement) throws SQLException {
+        return DaoFactory.getVocabularyDao().find(preparedStatement);
+    }
 
     @Override
     public List<Vocabulary> getAll() {

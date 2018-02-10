@@ -25,9 +25,9 @@ public class AddController implements Initializable {
     @FXML
     private Text txtField;
     @FXML
-    private ComboBox comboTwo;
+    private ComboBox<String> comboTwo;
     @FXML
-    private ComboBox comboOne;
+    private ComboBox<String> comboOne;
     @FXML
     private Button btnAdd;
     @FXML
@@ -42,9 +42,7 @@ public class AddController implements Initializable {
         comboList.setAll(Language.ENGLISH, Language.UKRAINIAN);
         comboOne.setItems(comboList);
         comboTwo.setItems(comboList);
-        btnAdd.setOnMouseClicked(event -> {
-            addWord(event);
-        });
+        btnAdd.setOnMouseClicked(this::addWord);
         btnExit.setOnAction(event -> exit());
     }
 
@@ -56,29 +54,23 @@ public class AddController implements Initializable {
     private void addWord(MouseEvent event) {
         String wordOne = txtWordOne.getText();
         String wordTwo = txtWordTwo.getText();
-        String itemOne = (String) comboOne.getSelectionModel().getSelectedItem();
-        String itemTwo = (String) comboTwo.getSelectionModel().getSelectedItem();
-        String langOne = null;
-        String langTwo = null;
+        String itemOne = comboOne.getSelectionModel().getSelectedItem();
+        String itemTwo = comboTwo.getSelectionModel().getSelectedItem();
         String ukrWord = null;
         String engWord = null;
         switch (itemOne) {
             case Language.UKRAINIAN:
-                langOne = "ukr";
                 ukrWord = wordOne;
                 break;
             case Language.ENGLISH:
-                langOne = "eng";
                 engWord = wordOne;
                 break;
         }
         switch (itemTwo) {
             case Language.UKRAINIAN:
-                langTwo = "ukr";
                 ukrWord = wordTwo;
                 break;
             case Language.ENGLISH:
-                langTwo = "eng";
                 engWord = wordTwo;
                 break;
         }

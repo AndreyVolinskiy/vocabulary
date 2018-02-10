@@ -21,8 +21,6 @@ public class VocabularyDaoImpl implements VocabularyDao {
     private static final String INSERT = "INSERT INTO vocabulary (ukr, eng) VALUES (?,?)";
     private static final String DELETE = "DELETE FROM vocabulary WHERE ukr = ? OR eng = ?";
 
-//   todo SELECT word FROM test WHERE word = 'Привіт' and language = 'eng';
-
     @Override
     public List<Vocabulary> getAll() {
         List<Vocabulary> list = new LinkedList<>();
@@ -46,8 +44,8 @@ public class VocabularyDaoImpl implements VocabularyDao {
         List<Vocabulary> list = new LinkedList<>();
         try (Connection connection = Database.getConnection();
              PreparedStatement statement = connection.prepareStatement(FIND)) {
-            statement.setString(1,word);
-            statement.setString(2,word);
+            statement.setString(1, word);
+            statement.setString(2, word);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 Vocabulary vocabulary = new Vocabulary();
@@ -59,6 +57,18 @@ public class VocabularyDaoImpl implements VocabularyDao {
             e.printStackTrace();
         }
         return list;
+    }
+
+    @Override
+    public String find(StringBuilder preparedStatement) throws SQLException {
+        String result = null;
+        try (Connection connection = Database.getConnection();
+             PreparedStatement statement = connection.prepareStatement(String.valueOf(preparedStatement))) {
+            ResultSet resultSet = statement.executeQuery();
+            resultSet.next();
+            result = resultSet.getString(1);
+        }
+        return result;
     }
 
     public void add(String ukrWord, String engWord) {
