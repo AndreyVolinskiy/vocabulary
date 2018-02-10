@@ -33,7 +33,13 @@ public class WelcomeController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         btnExit.setOnAction(event -> exit());
         btnDelete.setOnAction(event -> goDeleteWindow());
-        btnAdd.setOnAction(event -> goAddWindow());
+        btnAdd.setOnAction(event -> {
+            try {
+                goAddWindow(event);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
         btnView.setOnAction(event -> {
             try {
                 goViewWindow(event);
@@ -58,7 +64,17 @@ public class WelcomeController implements Initializable {
 //        stage.setOnHiding(e -> load());
     }
 
-    private void goAddWindow() {
+    private void goAddWindow(ActionEvent event) throws IOException {
+        final FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("/view/add.fxml"));
+        Parent parent = fxmlLoader.load();
+        final Stage stage = new Stage();
+        Scene value = new Scene(parent);
+        stage.setScene(value);
+        stage.initModality(Modality.WINDOW_MODAL);
+        Window window = ((Node) event.getSource()).getScene().getWindow();
+        stage.initOwner(window);
+        stage.show();
 
     }
 
