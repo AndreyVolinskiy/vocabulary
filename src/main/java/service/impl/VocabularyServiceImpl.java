@@ -1,6 +1,8 @@
 package service.impl;
 
+import dao.VocabularyDao;
 import dao.factory.DaoFactory;
+import dao.impl.VocabularyDaoImpl;
 import model.Vocabulary;
 import service.VocabularyService;
 
@@ -14,6 +16,11 @@ import java.util.List;
 public class VocabularyServiceImpl implements VocabularyService {
 
     public static final String IMPOSSIBLE = "Translation impossible.";
+
+    @Override
+    public List<Vocabulary> getAll() {
+        return DaoFactory.getVocabularyDao().getAll();
+    }
 
     @Override
     public String translate(String word) {

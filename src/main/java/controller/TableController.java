@@ -5,6 +5,7 @@ package controller;
  */
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -20,6 +21,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import model.Vocabulary;
+import service.factory.ServiceFactory;
 
 import java.io.IOException;
 import java.net.URL;
@@ -29,6 +31,8 @@ import java.util.ResourceBundle;
 
 public class TableController implements Initializable {
 
+    @FXML
+    private Button btnExit;
     @FXML
     private Button btnAdd;
     @FXML
@@ -43,13 +47,21 @@ public class TableController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
         init();
-        btnAdd.setOnMouseClicked(event -> {
+        load();
+        ServiceFactory.getVocabularyService().getAll();
+        btnExit.setOnAction(event -> exit());
+        btnAdd.setOnAction(event -> {
             try {
-                addWord(event);
+                goAddWindow(event);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         });
+    }
+
+    private void exit() {
+        Stage stage = (Stage) btnExit.getScene().getWindow();
+        stage.close();
     }
 
     private void init() {
@@ -59,15 +71,13 @@ public class TableController implements Initializable {
     }
 
     private void load() {
+        List<Vocabulary> list = ServiceFactory.getVocabularyService().getAll();
         observableList.clear();
-        List<Vocabulary> list = new LinkedList<>();
-        list.add(new Vocabulary("Привіт", "Hello"));
-        list.add(new Vocabulary("Мова", "Language"));
         observableList.addAll(list);
         table.setItems(observableList);
     }
 
-    private void addWord(MouseEvent event) throws IOException {
+        private void goAddWindow(ActionEvent event) throws IOException {
         final FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("/view/add.fxml"));
         Parent parent = fxmlLoader.load();
@@ -78,7 +88,6 @@ public class TableController implements Initializable {
         Window window = ((Node) event.getSource()).getScene().getWindow();
         stage.initOwner(window);
         stage.show();
-
-        stage.setOnHiding(e -> load());
+        stage.setOnHiding();
     }
 }

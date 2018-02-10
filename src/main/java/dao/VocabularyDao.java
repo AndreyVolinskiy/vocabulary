@@ -9,6 +9,8 @@ import java.util.List;
  */
 public interface VocabularyDao {
 
+    List<Vocabulary> getAll();
+
     List<Vocabulary> find(String word);
 
     void add(String ukrWord, String engWord);
